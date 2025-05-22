@@ -1,0 +1,229 @@
+/* App.css - Component-specific styles */
+
+/* Form Container Styling */
+.form-container {
+  max-width: 650px;
+  margin: 3rem auto;
+  padding: 3rem;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  border: 1px solid #f1f5f9;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.form-container h2 {
+  text-align: center;
+  color: #2d3748;
+  margin-bottom: 2.5rem;
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+/* Form Group Styling */
+.form-group {
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 4rem;
+  color: #4a5568;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+/* Input Styling */
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 1rem 1.25rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  background-color: #fafafa;
+  color: #2d3748;
+  font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #4299e1;
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
+  background-color: #ffffff;
+}
+
+.form-group input::placeholder {
+  color: #a0aec0;
+}
+
+/* Password Field Special Styling */
+.form-group input[name="password"] {
+  padding-right: 4rem;
+}
+
+.password-toggle-btn {
+  position: absolute;
+  right: 1rem;
+  top: 2.25rem;
+  background: #f7fafc;
+  border: 1px solid #e2e8f0;
+  color: #4a5568;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.password-toggle-btn:hover {
+  background-color: #edf2f7;
+  border-color: #cbd5e0;
+}
+
+/* Error Text Styling */
+.error-text {
+  color: #e53e3e;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+  font-weight: 500;
+}
+
+/* Submit Button Styling */
+.form-container button[type="submit"] {
+  width: 200px;
+  display: block;
+  margin: 3rem auto 0;
+  background: #4299e1;
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(66, 153, 225, 0.3);
+}
+
+.form-container button[type="submit"]:hover:not(:disabled) {
+  background: #3182ce;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(66, 153, 225, 0.4);
+}
+
+.form-container button[type="submit"]:disabled {
+  background: #a0aec0;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: 0 2px 4px rgba(160, 174, 192, 0.2);
+}
+
+/* Display Page Styling */
+.display-container {
+  max-width: 650px;
+  margin: 3rem auto;
+  padding: 3rem;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  border: 1px solid #f1f5f9;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.display-container h2 {
+  text-align: center;
+  color: #2d3748;
+  margin-bottom: 2.5rem;
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.display-container ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.display-container li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+  background: #f8fafc;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  transition: all 0.2s ease;
+}
+
+.display-container li:hover {
+  background: #edf2f7;
+  border-color: #cbd5e0;
+}
+
+.display-container li strong {
+  color: #4a5568;
+  font-weight: 600;
+  text-transform: capitalize;
+  min-width: 140px;
+}
+
+.display-container li:last-child {
+  margin-bottom: 0;
+}
+
+/* Back Button Styling */
+.back-btn {
+  width: 200px;
+  display: block;
+  margin: 3rem auto 0;
+  background: #48bb78;
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(72, 187, 120, 0.3);
+}
+
+.back-btn:hover {
+  background: #38a169;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(72, 187, 120, 0.4);
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+  .form-container,
+  .display-container {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .form-container h2,
+  .display-container h2 {
+    font-size: 1.5rem;
+  }
+
+  .display-container li {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .display-container li strong {
+    margin-bottom: 0.25rem;
+    min-width: auto;
+  }
+}
