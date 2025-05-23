@@ -79,10 +79,6 @@ react_form_validation/
 - **PAN**: Must follow the format `ABCDE1234F`.
 - **Aadhar**: Must be a 12-digit number.
 
-### Success Popup
-
-![Success Popup](https://via.placeholder.com/800x400?text=Success+Popup)
-
 ## ❤️ Thanks for checking it out!
 
 If you liked this project, give it a ⭐ and share with your friends!
