@@ -7,6 +7,7 @@ Check it out live here:
 
 ## ✨ Features
 
+<<<<<<< HEAD
 - ✅ **Real-time validation** with instant feedback
 - 🌍 Dynamic **Country & City** dropdown linked for easy selection
 - 🔒 Password visibility toggle (Show/Hide)
@@ -20,6 +21,21 @@ Check it out live here:
 - React Router (for navigation after submission)
 - Tailwind CSS (for styling)
 - JavaScript (For form validation logic)
+=======
+* ✅ **Real-time validation** with instant feedback
+* 🌍 Dynamic **Country & City** dropdown linked for easy selection
+* 🔒 Password visibility toggle (Show/Hide)
+* 🛡️ Validations for PAN, Aadhar, email, phone, and more
+* 🎨 Clean, professional design with responsive layout
+* 🎉 Success popup on form submission
+
+## 🛠️ Tech Stack
+
+* React (Functional Components + Hooks)
+* React Router (for navigation after submission)
+* Tailwind CSS (for styling)
+* JavaScript (For form validation logic)
+>>>>>>> 800f32e54b05846d055dd12f8e6a8ec992bd1128
 
 ## Installation
 
@@ -80,7 +96,6 @@ react_form_validation/
 - **Aadhar**: Must be a 12-digit number.
 
 ### Success Popup
-
 ![Success Popup](https://via.placeholder.com/800x400?text=Success+Popup)
 
 ## ❤️ Thanks for checking it out!
