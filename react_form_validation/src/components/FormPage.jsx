@@ -16,52 +16,53 @@ const validationRules = {
   firstName: {
     required: true,
     validator: (val) => val.trim() !== "",
-    errorMsg: "First name dalna zaroori hai bhai!",
+    errorMsg: "First name is required.",
   },
   lastName: {
     required: true,
     validator: (val) => val.trim() !== "",
-    errorMsg: "Last name bhi chahiye!",
+    errorMsg: "Last name is required.",
   },
   nickName: {
     required: true,
     validator: (val) => val.trim() !== "",
-    errorMsg: "Username toh de bhai!",
+    errorMsg: "Username is required.",
   },
   emailAddr: {
     required: true,
     validator: (val) => /^\S+@\S+\.\S+$/.test(val),
-    errorMsg: "Email thoda sahi daal yaar!",
+    errorMsg: "Please enter a valid email address.",
   },
   pass: {
     required: true,
     validator: (val) => val.length >= 6,
-    errorMsg: "Password kam se kam 6 character ka hona chahiye.",
+    errorMsg: "Password must be at least 6 characters long.",
   },
   phoneNumber: {
     required: true,
     validator: (val) => /^\+\d{1,4}\d{7,10}$/.test(val),
-    errorMsg: "Phone number +countrycode ke saath sahi format me do.",
+    errorMsg:
+      "Phone number must include country code and follow proper format.",
   },
   selectedCountry: {
     required: true,
     validator: (val) => val !== "",
-    errorMsg: "Country select kar le pehle.",
+    errorMsg: "Please select a country.",
   },
   selectedCity: {
     required: true,
     validator: (val) => val !== "",
-    errorMsg: "City bhi select karna padega.",
+    errorMsg: "Please select a city.",
   },
   panCard: {
     required: true,
     validator: (val) => /^[A-Z]{5}[0-9]{4}[A-Z]$/.test(val),
-    errorMsg: "PAN format galat hai (ex: ABCDE1234F).",
+    errorMsg: "Invalid PAN format (e.g., ABCDE1234F).",
   },
   aadharCard: {
     required: true,
     validator: (val) => /^\d{12}$/.test(val),
-    errorMsg: "Aadhar number 12 digits ka hona chahiye.",
+    errorMsg: "Aadhar number must be exactly 12 digits.",
   },
 };
 
@@ -319,7 +320,7 @@ function RegistrationForm() {
         <button
           type="submit"
           disabled={!isFormReady}
-          className={`w-full py-3 rounded-lg font-bold text-white uppercase transition
+          className={`w-full py-3 rounded-lg font-bold text-black uppercase transition
             border-2
             ${
               isFormReady

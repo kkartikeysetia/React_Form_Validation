@@ -9,26 +9,26 @@ function DisplayPage() {
     const labels = {
       firstName: "First Name",
       lastName: "Last Name",
-      username: "Username",
-      email: "Email Address",
-      password: "Password",
-      phone: "Phone Number",
-      country: "Country",
-      city: "City",
-      pan: "PAN Number",
-      aadhar: "Aadhar Number",
+      nickName: "Username",
+      emailAddr: "Email Address",
+      pass: "Password",
+      phoneNumber: "Phone Number",
+      selectedCountry: "Country",
+      selectedCity: "City",
+      panCard: "PAN Number",
+      aadharCard: "Aadhar Number",
     };
     return labels[key] || key;
   };
 
   const maskValue = (key, value) => {
-    if (key === "password") {
+    if (key === "pass") {
       return "•".repeat(value.length);
     }
-    if (key === "aadhar") {
+    if (key === "aadharCard") {
       return `XXXX XXXX ${value.slice(-4)}`;
     }
-    if (key === "pan") {
+    if (key === "panCard") {
       return `${value.slice(0, 5)}XXXX${value.slice(-1)}`;
     }
     return value;
