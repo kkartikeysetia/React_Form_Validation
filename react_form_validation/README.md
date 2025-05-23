@@ -1,5 +1,3 @@
-GitHub Copilot: # React Form Validation
-
 This project is a **React-based form validation application** that allows users to fill out a registration form with various fields, validates the input, and displays a success message upon successful submission. The form includes client-side validation for fields such as name, email, password, phone number, and more.
 
 ## Features
