@@ -35,8 +35,8 @@ function DisplayPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br w-full from-gray-50 via-gray-100 to-gray-200 flex justify-center items-start py-12 px-4 print-container">
-      <div className="w-1/3 max-w-3xl bg-white rounded-2xl border border-gray-300 shadow-xl p-10">
+    <div className="min-h-screen bg-gradient-to-br w-full from-slate-100 via-slate-200 to-slate-200 py-8 px-8 flex justify-center items-start py-12 px-4 print-container">
+      <div className="w-1/3 max-w-3xl bg-white rounded-2xl border border-gray-900 shadow-xl p-10">
         <div className="text-center mb-10">
           <h2 className="text-4xl font-extrabold text-gray-900 mb-3">
             Registration Successful!{" "}
