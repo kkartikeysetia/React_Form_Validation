@@ -75,3 +75,39 @@ button,
   background-color: #4299e1;
   color: white;
 }
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  /* Container adjustments */
+  .print-container {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 1rem !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+  /* Flexbox fix */
+  .print-flex {
+    display: block !important;
+  }
+
+  /* Label and value alignment */
+  .print-label {
+    display: block !important;
+    width: 100% !important;
+    font-weight: bold !important;
+    text-transform: uppercase !important;
+    margin-bottom: 0.25rem !important;
+  }
+
+  .print-value {
+    display: block !important;
+    margin-left: 0 !important;
+    font-weight: normal !important;
+  }
+}

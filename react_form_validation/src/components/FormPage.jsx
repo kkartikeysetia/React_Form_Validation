@@ -1,17 +1,22 @@
 import React, { useState } from "react";
-
 import { useNavigate } from "react-router-dom";
-const [showSuccess, setShowSuccess] = useState(false);
 
 const countryCityMap = {
   India: ["Delhi", "Mumbai", "Bangalore"],
   USA: ["New York", "Chicago", "San Francisco"],
   Canada: ["Toronto", "Vancouver", "Montreal"],
+  Australia: ["Sydney", "Melbourne", "Brisbane"],
+  Germany: ["Berlin", "Munich", "Frankfurt"],
+  Japan: ["Tokyo", "Osaka", "Kyoto"],
 };
 
 function FormPage() {
   const navigate = useNavigate();
 
+  // Popup state
+  const [showSuccess, setShowSuccess] = useState(false);
+
+  // Form state
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -24,28 +29,24 @@ function FormPage() {
     pan: "",
     aadhar: "",
   });
-
   const [errors, setErrors] = useState({});
   const [touched, setTouched] = useState({});
   const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-    if (touched[name]) {
-      validateField(name, value);
-    }
+    setFormData((f) => ({ ...f, [name]: value }));
+    if (touched[name]) validateField(name, value);
   };
 
   const handleBlur = (e) => {
     const { name, value } = e.target;
-    setTouched({ ...touched, [name]: true });
+    setTouched((t) => ({ ...t, [name]: true }));
     validateField(name, value);
   };
 
   const validateField = (name, value) => {
     let error = "";
-
     switch (name) {
       case "firstName":
       case "lastName":
@@ -71,7 +72,7 @@ function FormPage() {
         if (!value) error = "Please select a city.";
         break;
       case "pan":
-        if (!/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/.test(value))
+        if (!/^[A-Z]{5}[0-9]{4}[A-Z]$/.test(value))
           error = "Invalid PAN (e.g., ABCDE1234F)";
         break;
       case "aadhar":
@@ -80,28 +81,17 @@ function FormPage() {
       default:
         break;
     }
-
-    setErrors((prev) => ({ ...prev, [name]: error }));
+    setErrors((e) => ({ ...e, [name]: error }));
   };
-
-  const isFormValid =
-    Object.values(errors).every((e) => !e) &&
-    Object.values(formData).every((v) => v.trim());
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // run validation for all fields
     let valid = true;
     const newErrors = {};
-    setErrors(newErrors);
-    if (valid) {
-      -navigate("/display", { state: formData });
-      +setShowSuccess(true);
-    }
-
     Object.entries(formData).forEach(([name, value]) => {
       let error = "";
-
       switch (name) {
         case "firstName":
         case "lastName":
@@ -128,7 +118,7 @@ function FormPage() {
           if (!value) error = "Please select a city.";
           break;
         case "pan":
-          if (!/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/.test(value))
+          if (!/^[A-Z]{5}[0-9]{4}[A-Z]$/.test(value))
             error = "Invalid PAN (e.g., ABCDE1234F)";
           break;
         case "aadhar":
@@ -137,25 +127,29 @@ function FormPage() {
         default:
           break;
       }
-
       if (error) valid = false;
       newErrors[name] = error;
     });
-
     setErrors(newErrors);
 
     if (valid) {
-      navigate("/display", { state: formData });
+      // show the success popup
+      setShowSuccess(true);
     }
   };
 
+  // simple check: all fields non-empty and no errors
+  const isFormValid =
+    Object.values(formData).every((v) => v.trim()) &&
+    Object.values(errors).every((e) => !e);
+
   return (
-    <div className="min-h-screen max-h-screen overflow-y-auto bg-gradient-to-br from-blue-500 via-purple-500 to-purple-700 py-8 px-4 flex justify-center items-start">
+    <div className="min-h-screen bg-gradient-to-br w-full from-slate-100 via-slate-200 to-slate-300 py-8 px-8 flex justify-center items-start">
       <form
-        className="max-w-md w-full max-h-[90vh] overflow-y-auto text-black bg-white rounded-xl shadow-2xl p-6 space-y-6"
         onSubmit={handleSubmit}
+        className="w-1/3 bg-white rounded-xl shadow-2xl border border-slate-900 p-8 space-y-6"
       >
-        <h2 className="text-3xl font-bold text-gray-800 text-center mb-8">
+        <h2 className="text-3xl font-bold text-gray-800 text-center mb-4">
           Registration Form
         </h2>
 
@@ -172,37 +166,37 @@ function FormPage() {
           { label: "PAN No.", name: "pan" },
           { label: "Aadhar No.", name: "aadhar" },
         ].map(({ label, name, type = "text", placeholder }) => (
-          <div key={name} className="mb-6">
-            <label className="block text-sm font-semibold text-gray-700 uppercase tracking-wide mb-2">
+          <div key={name} className="mb-4">
+            <label className="block text-sm font-semibold text-gray-700 uppercase mb-1">
               {label}
             </label>
             <input
               type={type}
               name={name}
+              placeholder={placeholder}
               value={formData[name]}
               onChange={handleChange}
               onBlur={handleBlur}
-              placeholder={placeholder}
-              className={`w-full px-4 py-3 border-2 rounded-lg text-gray-900 placeholder-gray-400
-                focus:outline-none focus:ring-3 focus:ring-blue-300 focus:border-blue-500
-                transition duration-200 ${
+              className={`w-full px-4 py-2 border-2 rounded-lg text-slate-900 placeholder-slate-400
+                focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-600
+                ${
                   touched[name] && errors[name]
                     ? "border-red-500 bg-red-50"
-                    : "border-gray-300 hover:border-gray-400"
+                    : "border-slate-300"
                 }`}
             />
             {touched[name] && errors[name] && (
               <p className="text-red-600 text-sm mt-1 flex items-center">
-                <span className="mr-2">⚠</span>
+                <span className="mr-1">⚠</span>
                 {errors[name]}
               </p>
             )}
           </div>
         ))}
 
-        {/* Password Field */}
-        <div className="mb-6">
-          <label className="block text-sm font-semibold text-gray-700 uppercase tracking-wide mb-2">
+        {/* Password */}
+        <div className="mb-4">
+          <label className="block text-sm font-semibold text-gray-700 uppercase mb-1">
             Password
           </label>
           <div className="relative">
@@ -212,33 +206,33 @@ function FormPage() {
               value={formData.password}
               onChange={handleChange}
               onBlur={handleBlur}
-              className={`w-full px-4 py-3 pr-12 border-2 rounded-lg text-gray-900
-                focus:outline-none focus:ring-3 focus:ring-blue-300 focus:border-blue-500
-                transition duration-200 ${
+              className={`w-full px-4 py-2 pr-12 border-2 rounded-lg text-gray-900
+                focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-blue-500
+                ${
                   touched.password && errors.password
                     ? "border-red-500 bg-red-50"
-                    : "border-gray-300 hover:border-gray-400"
+                    : "border-gray-300"
                 }`}
             />
             <button
               type="button"
-              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-blue-600 hover:bg-gray-100 px-2 py-1 rounded text-sm font-medium transition-colors"
-              onClick={() => setShowPassword(!showPassword)}
+              onClick={() => setShowPassword((s) => !s)}
+              className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-blue-600"
             >
               {showPassword ? "Hide" : "Show"}
             </button>
           </div>
           {touched.password && errors.password && (
             <p className="text-red-600 text-sm mt-1 flex items-center">
-              <span className="mr-2">⚠</span>
+              <span className="mr-1">⚠</span>
               {errors.password}
             </p>
           )}
         </div>
 
-        {/* Country Select */}
-        <div className="mb-6">
-          <label className="block text-sm font-semibold text-gray-700 uppercase tracking-wide mb-2">
+        {/* Country */}
+        <div className="mb-4">
+          <label className="block text-sm font-semibold text-slate-700 uppercase mb-1">
             Country
           </label>
           <select
@@ -246,32 +240,32 @@ function FormPage() {
             value={formData.country}
             onChange={handleChange}
             onBlur={handleBlur}
-            className={`w-full px-4 py-3 border-2 rounded-lg text-gray-900
-              focus:outline-none focus:ring-3 focus:ring-blue-300 focus:border-blue-500
-              transition duration-200 ${
+            className={`w-full px-4 py-2 border-2 rounded-lg text-gray-900
+              focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-blue-500
+              ${
                 touched.country && errors.country
                   ? "border-red-500 bg-red-50"
-                  : "border-gray-300 hover:border-gray-400"
+                  : "border-gray-300"
               }`}
           >
             <option value="">-- Select Country --</option>
-            {Object.keys(countryCityMap).map((country) => (
-              <option key={country} value={country}>
-                {country}
+            {Object.keys(countryCityMap).map((c) => (
+              <option key={c} value={c}>
+                {c}
               </option>
             ))}
           </select>
           {touched.country && errors.country && (
             <p className="text-red-600 text-sm mt-1 flex items-center">
-              <span className="mr-2">⚠</span>
+              <span className="mr-1">⚠</span>
               {errors.country}
             </p>
           )}
         </div>
 
-        {/* City Select */}
-        <div className="mb-6">
-          <label className="block text-sm font-semibold text-gray-700 uppercase tracking-wide mb-2">
+        {/* City */}
+        <div className="mb-4">
+          <label className="block text-sm font-semibold text-gray-700 uppercase mb-1">
             City
           </label>
           <select
@@ -279,12 +273,12 @@ function FormPage() {
             value={formData.city}
             onChange={handleChange}
             onBlur={handleBlur}
-            className={`w-full px-4 py-3 border-2 rounded-lg text-gray-900
-              focus:outline-none focus:ring-3 focus:ring-blue-300 focus:border-blue-500
-              transition duration-200 ${
+            className={`w-full px-4 py-2 border-2 rounded-lg text-gray-900
+              focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-blue-500
+              ${
                 touched.city && errors.city
                   ? "border-red-500 bg-red-50"
-                  : "border-gray-300 hover:border-gray-400"
+                  : "border-gray-300"
               }`}
           >
             <option value="">-- Select City --</option>
@@ -296,27 +290,29 @@ function FormPage() {
           </select>
           {touched.city && errors.city && (
             <p className="text-red-600 text-sm mt-1 flex items-center">
-              <span className="mr-2">⚠</span>
+              <span className="mr-1">⚠</span>
               {errors.city}
             </p>
           )}
         </div>
 
-        {/* Submit Button */}
+        {/* Submit */}
         <button
           type="submit"
           disabled={!isFormValid}
-          className={`mt-4 w-full py-4 px-6 rounded-lg font-semibold bg-gray text-black uppercase tracking-wide
-    transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-4
+          className={`w-full py-3 rounded-lg font-bold text-black uppercase transition
+    border-2
     ${
       isFormValid
-        ? "bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 shadow-lg hover:shadow-xl focus:ring-blue-300"
-        : "bg-gray-400 cursor-not-allowed shadow-none transform-none"
+        ? "bg-blue-700 border-blue-800 hover:bg-blue-800 hover:border-blue-900"
+        : "bg-gray-400 border-gray-400 cursor-not-allowed"
     }`}
         >
           Submit Registration
         </button>
       </form>
+
+      {/* Success Popup */}
       {showSuccess && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-xl p-6 max-w-sm w-full text-center">
@@ -338,4 +334,5 @@ function FormPage() {
     </div>
   );
 }
+
 export default FormPage;

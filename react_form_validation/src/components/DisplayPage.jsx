@@ -35,31 +35,35 @@ function DisplayPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-400 via-blue-500 to-purple-600 py-8 px-4 flex justify-center items-start">
-      <div className="w-full max-w-2xl bg-white rounded-xl shadow-2xl p-8">
-        <div className="text-center mb-8">
-          <h2 className="text-3xl font-bold text-gray-800 mb-2">
-            Registration Successful! ✅
+    <div className="min-h-screen bg-gradient-to-br w-full from-gray-50 via-gray-100 to-gray-200 flex justify-center items-start py-12 px-4 print-container">
+      <div className="w-1/3 max-w-3xl bg-white rounded-2xl border border-gray-300 shadow-xl p-10">
+        <div className="text-center mb-10">
+          <h2 className="text-4xl font-extrabold text-gray-900 mb-3">
+            Registration Successful!{" "}
+            <span aria-label="checkmark" role="img">
+              ✅
+            </span>
           </h2>
-          <p className="text-gray-600">Here are your submitted details:</p>
+          <p className="text-gray-600 text-lg">
+            Here are your submitted details:
+          </p>
         </div>
 
-        <div className="space-y-4 mb-8">
+        <div className="space-y-5 mb-12">
           {Object.entries(state).map(([key, value]) => (
             <div
               key={key}
-              className="flex flex-col sm:flex-row sm:items-center p-4
-                bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg
-                border-l-4 border-blue-500 hover:shadow-md transition-all duration-200
-                hover:translate-x-1"
+              className="flex flex-col sm:flex-row sm:items-center p-5
+                bg-gray-50 rounded-lg border-l-6 border-blue-600
+                hover:shadow-md transition-all duration-200 hover:translate-x-1 print-flex"
             >
-              <div className="sm:w-1/3 mb-2 sm:mb-0">
+              <div className="sm:w-1/3 mb-3 sm:mb-0 print-label">
                 <span className="font-semibold text-gray-700 text-sm uppercase tracking-wide">
                   {getReadableLabel(key)}:
                 </span>
               </div>
-              <div className="sm:w-2/3">
-                <span className="text-gray-900 font-medium">
+              <div className="sm:w-2/3 print-value">
+                <span className="text-gray-900 font-medium text-base">
                   {maskValue(key, value)}
                 </span>
               </div>
@@ -67,42 +71,16 @@ function DisplayPage() {
           ))}
         </div>
 
-        <div className="flex flex-col sm:flex-row gap-4">
+        <div className="flex flex-col sm:flex-row gap-6">
           <button
             onClick={() => navigate("/")}
-            className="flex-1 bg-gradient-to-r from-green-500 to-green-700
-              hover:from-green-600 hover:to-green-800 text-white font-semibold
-              py-4 px-6 rounded-lg transition duration-300 transform hover:scale-105
-              focus:outline-none focus:ring-4 focus:ring-green-300 shadow-lg hover:shadow-xl
-              uppercase tracking-wide"
+            className="flex-1 bg-gradient-to-r from-gray-600 to-gray-700
+              hover:from-gray-700 hover:to-gray-800 text-white font-semibold
+              py-4 px-6 rounded-xl transition duration-300 transform hover:scale-105
+              focus:outline-none focus:ring-4 focus:ring-green-400 shadow-lg"
           >
             ← Go Back to Form
           </button>
-
-          <button
-            onClick={() => window.print()}
-            className="flex-1 bg-gradient-to-r from-blue-500 to-blue-700
-              hover:from-blue-600 hover:to-blue-800 text-white font-semibold
-              py-4 px-6 rounded-lg transition duration-300 transform hover:scale-105
-              focus:outline-none focus:ring-4 focus:ring-blue-300 shadow-lg hover:shadow-xl
-              uppercase tracking-wide"
-          >
-            🖨️ Print Details
-          </button>
-        </div>
-
-        <div className="text-center mt-8 opacity-75">
-          <div className="inline-flex items-center space-x-2 text-green-600">
-            <div className="w-2 h-2 bg-green-500 rounded-full animate-bounce"></div>
-            <div
-              className="w-2 h-2 bg-green-500 rounded-full animate-bounce"
-              style={{ animationDelay: "0.1s" }}
-            ></div>
-            <div
-              className="w-2 h-2 bg-green-500 rounded-full animate-bounce"
-              style={{ animationDelay: "0.2s" }}
-            ></div>
-          </div>
         </div>
       </div>
     </div>
